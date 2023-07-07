@@ -1,20 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './views/HomeScreen';
+import ProfileScreen from './views/ProfileScreen';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Bee Mindful App 🐝</Text>
-      <View collapsable="true" style={styles.emotionsContainer}>
-        {/* emotion buttons which shows an overlay on click */}
-      <Button onPress={() => console.log('hi')} title="😡" accessibilityLabel='angry' color="white"/>
-      <Button onPress={() => console.log('hi')} title="🙁" accessibilityLabel='sad' color="white"/>
-      <Button onPress={() => console.log('hi')} title="😐" accessibilityLabel='neutral' color="white"/>
-      <Button onPress={() => console.log('hi')} title="😊" accessibilityLabel='content' color="white"/>
-      <Button onPress={() => console.log('hi')} title="😄" accessibilityLabel='joyful' color="white" />
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{title: 'BeeMindful Home'}}
+        />
+        <Stack.Screen name="Profile" component={ProfileScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
