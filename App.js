@@ -10,6 +10,10 @@ import {FaPortrait, FaHome} from 'react-icons/fa'
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
+const tabOptions = {
+  tabBarActiveTintColor: 'tomato',
+          tabBarInactiveTintColor: 'gray',
+}
 export default function App() {
   return (
     <NavigationContainer>
@@ -21,15 +25,16 @@ export default function App() {
           name="Home"
           component={HomeScreen}
           options={{title: 'BeeMindful Home', tabBarIcon: () => (
-            <FaPortrait />
-          ),}}
+            <FaHome />
+          ), ...tabOptions}}
           
         />
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
-          tabBarLabel: 'Profile',
+          // tabBarLabel: 'Profile',
           tabBarIcon: () => (
             <FaPortrait />
           ),
+          ...tabOptions
         }}/>
       </Tab.Navigator>
     </NavigationContainer>
