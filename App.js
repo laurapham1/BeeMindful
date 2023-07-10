@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './views/HomeScreen';
 import ProfileScreen from './views/ProfileScreen';
+import {FaPortrait, FaHome} from 'react-icons/fa'
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -19,13 +20,16 @@ export default function App() {
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'BeeMindful Home'}}
+          options={{title: 'BeeMindful Home', tabBarIcon: () => (
+            <FaPortrait />
+          ),}}
+          
         />
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
           tabBarLabel: 'Profile',
-          // tabBarIcon: ({ color, size }) => (
-          //   <MaterialCommunityIcons name="home" color={color} size={size} />
-          // ),
+          tabBarIcon: () => (
+            <FaPortrait />
+          ),
         }}/>
       </Tab.Navigator>
     </NavigationContainer>

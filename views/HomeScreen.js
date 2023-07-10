@@ -17,7 +17,7 @@ export default function HomeScreen({navigation}) {
         <Button
         title="Go to Laura's profile"
         onPress={() =>
-          navigation.navigate('Profile', {name: 'Laura'})
+          navigation.navigate('Profile')
         }
       />
       <Modal

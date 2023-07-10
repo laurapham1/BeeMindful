@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function ProfileScreen({navigation, route}) {
+export default function ProfileScreen({navigation}) {
   return (
     <View style={styles.container}>
-        <Text>This is {route.params.name}'s profile</Text>
+        <Text>This is your profile</Text>
     </View>
   );
 }
