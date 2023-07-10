@@ -1,25 +1,19 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, Modal } from 'react-native';
+import { StyleSheet, Text, View, Button, Modal, TouchableOpacity } from 'react-native';
 
 export default function HomeScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     <View style={styles.container}>
-      <Text>Bee Mindful HomeScreen 🐝</Text>
+      <Text style={styles.heading}>How are you feeling today?</Text>
       <View collapsable="true" style={styles.emotionsContainer}>
         {/* emotion buttons which shows an overlay on click */}
-      <Button onPress={() => setModalVisible(!modalVisible)} title="😡" accessibilityLabel='angry' color="white"/>
-      <Button onPress={() => setModalVisible(!modalVisible)} title="🙁" accessibilityLabel='sad' color="white"/>
-      <Button onPress={() => setModalVisible(!modalVisible)} title="😐" accessibilityLabel='neutral' color="white"/>
-      <Button onPress={() => setModalVisible(!modalVisible)} title="😊" accessibilityLabel='content' color="white"/>
-      <Button onPress={() => setModalVisible(!modalVisible)} title="😄" accessibilityLabel='joyful' color="white" />
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} accessibilityLabel='angry' color="white" ><Text style={styles.emotionContainer}>😡</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}  accessibilityLabel='sad' color="white" ><Text style={styles.emotionContainer}>🙁</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}  accessibilityLabel='neutral' color="white" ><Text style={styles.emotionContainer}>😐</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)}  accessibilityLabel='content' color="white" ><Text style={styles.emotionContainer}>😊</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => setModalVisible(!modalVisible)} accessibilityLabel='joyful' color="white" ><Text style={styles.emotionContainer}>😄</Text></TouchableOpacity>
       </View>
-        <Button
-        title="Go to Laura's profile"
-        onPress={() =>
-          navigation.navigate('Profile')
-        }
-      />
       <Modal
         animationType="slide"
         transparent={true}
@@ -48,9 +42,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: '16px'
+  },
+  heading: {
+    fontSize: '24px'
   },
   emotionsContainer: {
     flexDirection: 'row',
+    gap: '16px'
+  },
+  emotionContainer: {
+    fontSize: '10vw',
   },
   centeredView: {
     flex: 1,
