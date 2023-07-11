@@ -6,8 +6,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './views/HomeScreen';
 import ProfileScreen from './views/ProfileScreen';
 import NotificationScreen from './views/NotificationScreen';
-import AnalyticScreen from './views/AnalyticScreen';
-import {FaPortrait, FaHome} from 'react-icons/fa'
+import SummaryScreen from './views/SummaryScreen';
+import {FaPortrait, FaHome, FaBell, FaCalendarAlt, FaCalendarDay} from 'react-icons/fa'
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -26,25 +26,24 @@ export default function App() {
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'BeeMindful Home', tabBarIcon: () => (
-            <FaHome />
+          options={{title: 'BeeMindful', tabBarLabel: 'Today', tabBarIcon: () => (
+            <FaCalendarDay />
           ), ...tabOptions}}
           
         />
-          <Tab.Screen name="Notifications" component={NotificationScreen} options={{
+        <Tab.Screen name="Summary" component={SummaryScreen} options={{
+          tabBarIcon: () => (
+            <FaCalendarAlt />
+          ),
+          ...tabOptions
+        }}/>
+                  <Tab.Screen name="Notifications" component={NotificationScreen} options={{
             tabBarIcon: () => (
-              <FaPortrait />
+              <FaBell />
             ),
             tabBarBadge: 3,
             ...tabOptions
           }}/>
-        <Tab.Screen name="Analytics" component={AnalyticScreen} options={{
-          // tabBarLabel: 'Profile',
-          tabBarIcon: () => (
-            <FaPortrait />
-          ),
-          ...tabOptions
-        }}/>
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
           // tabBarLabel: 'Profile',
           tabBarIcon: () => (

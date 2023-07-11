@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function AnalyticScreen({navigation}) {
+export default function SummaryScreen({navigation}) {
   return (
     <View style={styles.container}>
-        <Text>This is your analytics</Text>
+        <Text>This is your summary</Text>
     </View>
   );
 }
