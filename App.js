@@ -5,6 +5,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './views/HomeScreen';
 import ProfileScreen from './views/ProfileScreen';
+import NotificationScreen from './views/NotificationScreen';
+import AnalyticScreen from './views/AnalyticScreen';
 import {FaPortrait, FaHome} from 'react-icons/fa'
 
 // const Stack = createNativeStackNavigator();
@@ -29,6 +31,20 @@ export default function App() {
           ), ...tabOptions}}
           
         />
+          <Tab.Screen name="Notifications" component={NotificationScreen} options={{
+            tabBarIcon: () => (
+              <FaPortrait />
+            ),
+            tabBarBadge: 3,
+            ...tabOptions
+          }}/>
+        <Tab.Screen name="Analytics" component={AnalyticScreen} options={{
+          // tabBarLabel: 'Profile',
+          tabBarIcon: () => (
+            <FaPortrait />
+          ),
+          ...tabOptions
+        }}/>
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
           // tabBarLabel: 'Profile',
           tabBarIcon: () => (

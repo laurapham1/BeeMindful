@@ -39,10 +39,10 @@ export default function HomeScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#f4d06f',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '16px'
+    gap: '24px'
   },
   heading: {
     fontSize: '24px'
