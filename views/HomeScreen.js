@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Button, Modal, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity } from 'react-native';
+import { primaryColor } from '../helpers/themes';
 
 export default function HomeScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false)
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>BeeMindful 🐝</Text>
       <Text style={styles.heading}>How are you feeling today?</Text>
       <View collapsable="true" style={styles.emotionsContainer}>
         {/* emotion buttons which shows an overlay on click */}
@@ -23,12 +25,14 @@ export default function HomeScreen({navigation}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Emotion clicked</Text>
-            <Button
-              style={[styles.button, styles.buttonClose]}
+            <Text style={styles.modalText}>Emotion saved for today</Text>
+            <Text style={styles.modalText}>🤗</Text>
+            <TouchableOpacity
+              style={styles.button}
               onPress={() => setModalVisible(!modalVisible)}
-              title="Close modal"
-            />
+            >
+              <Text>Close</Text>
+              </TouchableOpacity>
           </View>
         </View>
       </Modal>
@@ -39,13 +43,14 @@ export default function HomeScreen({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f4d06f',
+    backgroundColor: primaryColor,
     alignItems: 'center',
     justifyContent: 'center',
     gap: '24px'
   },
   heading: {
-    fontSize: '24px'
+    fontSize: '24px',
+    color: 'white'
   },
   emotionsContainer: {
     flexDirection: 'row',
@@ -74,17 +79,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
+    display: 'flex',
+    gap: '8px',
+    opacity: '95%'
+  },
+  modalText: {
+    fontSize: '18px'
   },
   button: {
-    borderRadius: 20,
+    borderRadius: 8,
     padding: 10,
     elevation: 2,
-    color: 'white'
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: 'white !important',
+    border: '1px solid black',
   },
 })
