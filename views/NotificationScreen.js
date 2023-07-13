@@ -1,12 +1,28 @@
-import { StyleSheet, Text, View, Button, VirtualizedList, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  VirtualizedList,
+  Image,
+} from "react-native";
+import { faker } from "@faker-js/faker";
 
-const getItem = (_data, index) => ({
-  id: Math.random().toString(12).substring(0),
-  owner: `Person ${index + 1}`,
-  title: <><strong>Person {index + 1}</strong><span> shared a </span> <strong>daily update</strong></>,
-  time: `${Math.random(10)} min ago`,
-  seen: false,
-});
+const getItem = (_data, index) => {
+  const randomName = faker.person.fullName();
+  return {
+    id: Math.random().toString(12).substring(0),
+    owner: randomName,
+    title: (
+      <>
+        <strong>{randomName}</strong>
+        <span> shared a </span><strong>daily update</strong>
+      </>
+    ),
+    time: `${Math.floor(Math.random() * 10)} min ago`,
+    seen: false,
+  };
+};
 
 const getItemCount = (_data) => 50;
 
@@ -14,17 +30,21 @@ const Item = ({ owner, title, time, seen }) => (
   <View style={styles.item}>
     <Image
       // className="w-6 h-6 rounded-full"
-      source={{uri:`https://eu.ui-avatars.com/api/?name=${owner}&size=500&background=random`}}
+      source={{
+        uri: `https://eu.ui-avatars.com/api/?name=${owner}&size=500&background=random`,
+      }}
       // alt="profile picture"
       style={{
         width: 25,
         height: 25,
-        borderRadius: '50%',
-        resizeMode: 'contain',
+        borderRadius: "50%",
+        resizeMode: "contain",
       }}
     />
-    <Text style={styles.title}>{title}</Text>
-    <Text style={styles.title}>{time}</Text>
+    <View style={styles.notificationText}>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{time}</Text>
+    </View>
   </View>
 );
 
@@ -33,7 +53,9 @@ export default function NotificationScreen({ navigation }) {
     <View style={styles.container}>
       <VirtualizedList
         initialNumToRender={10}
-        renderItem={({ item }) => <Item title={item.title} />}
+        renderItem={({ item }) => (
+          <Item title={item.title} owner={item.owner} time={item.time} />
+        )}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
         getItem={getItem}
@@ -53,12 +75,15 @@ const styles = StyleSheet.create({
     // backgroundColor: '#f9c2ff',
     padding: 20,
     width: "100vw",
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: "16px",
+  },
+  notificationText: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: '4px',
   },
   title: {
-    fontSize: 10,
+    fontSize: 12,
   },
 });
