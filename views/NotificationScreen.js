@@ -8,26 +8,31 @@ import {
 } from "react-native";
 import { faker } from "@faker-js/faker";
 
-const getItem = (_data, _index) => {
+const getItem = (_data, index) => {
   const randomName = faker.person.fullName();
+  const message1 = <span> shared a <strong>daily update</strong></span>
+  const message2 = <span> like your <strong>daily update</strong></span>
+  const message3 = <span> commented on your <strong>daily update</strong></span>
+  const messageArray = [message1,message2, message3]
+  const randomMessage = messageArray[Math.floor(Math.random() * messageArray.length)]
   return {
     id: Math.random().toString(12).substring(0),
     owner: randomName,
     title: (
-      <>
+      <span>
         <strong>{randomName}</strong>
-        <span> shared a </span><strong>daily update</strong>
-      </>
+        {randomMessage}
+      </span>
     ),
-    time: `${Math.floor(Math.random() * 10)} min ago`,
+    time: `${index * 2} min ago`,
     seen: Math.random() < 0.5,
   };
 };
 
-const getItemCount = (_data) => 50;
+const getItemCount = (_data) => 20;
 
 const Item = ({ owner, title, time, seen }) => (
-  <View style={{backgroundColor: seen ? '' : '#cdcdcd', ...styles.item}}>
+  <View style={{backgroundColor: seen ? '' : '#FAFBFF', ...styles.item}} onPress={() => handlePressNotification()}>
     <Image
       // className="w-6 h-6 rounded-full"
       source={{
@@ -35,15 +40,15 @@ const Item = ({ owner, title, time, seen }) => (
       }}
       // alt="profile picture"
       style={{
-        width: 25,
-        height: 25,
+        width: 30,
+        height: 30,
         borderRadius: "50%",
         resizeMode: "contain",
       }}
     />
     <View style={styles.notificationText}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={styles.title}>{time}</Text>
+      <Text style={{color: '#737983', ...styles.title}}>{time}</Text>
     </View>
   </View>
 );
@@ -72,21 +77,25 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   item: {
-    // backgroundColor: '#f9c2ff',
     padding: 20,
     width: "100vw",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     gap: "16px",
-    cursor: 'pointer'
+    cursor: 'pointer',
+    borderBottomColor: '#EBECF0',
+    borderBottomWidth: 1,
   },
   notificationText: {
     display: 'flex',
+    gap: '4px',
+    width: '100%'
   },
   title: {
     fontSize: 12,
-    overflow: 'hidden', 
-    textOverflow: 'ellipsis'
+    // overflow: 'hidden', 
+    // textOverflow: 'ellipsis',
+    width: '100%'
   },
 });
