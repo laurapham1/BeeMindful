@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { faker } from "@faker-js/faker";
 
-const getItem = (_data, index) => {
+const getItem = (_data, _index) => {
   const randomName = faker.person.fullName();
   return {
     id: Math.random().toString(12).substring(0),
@@ -20,14 +20,14 @@ const getItem = (_data, index) => {
       </>
     ),
     time: `${Math.floor(Math.random() * 10)} min ago`,
-    seen: false,
+    seen: Math.random() < 0.5,
   };
 };
 
 const getItemCount = (_data) => 50;
 
 const Item = ({ owner, title, time, seen }) => (
-  <View style={styles.item}>
+  <View style={{backgroundColor: seen ? '' : '#cdcdcd', ...styles.item}}>
     <Image
       // className="w-6 h-6 rounded-full"
       source={{
@@ -54,7 +54,7 @@ export default function NotificationScreen({ navigation }) {
       <VirtualizedList
         initialNumToRender={10}
         renderItem={({ item }) => (
-          <Item title={item.title} owner={item.owner} time={item.time} />
+          <Item title={item.title} owner={item.owner} time={item.time} seen={item.seen} />
         )}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
@@ -79,11 +79,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: "16px",
+    cursor: 'pointer'
   },
   notificationText: {
     display: 'flex',
   },
   title: {
     fontSize: 12,
+    overflow: 'hidden', 
+    textOverflow: 'ellipsis'
   },
 });
