@@ -2,17 +2,19 @@ import { StyleSheet, Text, View, Button, VirtualizedList, Image } from "react-na
 
 const getItem = (_data, index) => ({
   id: Math.random().toString(12).substring(0),
-  title: `Person ${index + 1} shared a daily update`,
+  owner: `Person ${index + 1}`,
+  title: <><strong>Person {index + 1}</strong><span> shared a </span> <strong>daily update</strong></>,
+  time: `${Math.random(10)} min ago`,
   seen: false,
 });
 
 const getItemCount = (_data) => 50;
 
-const Item = ({ title, seen }) => (
+const Item = ({ owner, title, time, seen }) => (
   <View style={styles.item}>
     <Image
       // className="w-6 h-6 rounded-full"
-      source={{uri:`https://eu.ui-avatars.com/api/?name=LP&size=500&background=random`}}
+      source={{uri:`https://eu.ui-avatars.com/api/?name=${owner}&size=500&background=random`}}
       // alt="profile picture"
       style={{
         width: 25,
@@ -22,6 +24,7 @@ const Item = ({ title, seen }) => (
       }}
     />
     <Text style={styles.title}>{title}</Text>
+    <Text style={styles.title}>{time}</Text>
   </View>
 );
 
