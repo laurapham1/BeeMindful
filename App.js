@@ -7,49 +7,51 @@ import HomeScreen from './views/HomeScreen';
 import ProfileScreen from './views/ProfileScreen';
 import NotificationScreen from './views/NotificationScreen';
 import SummaryScreen from './views/SummaryScreen';
-import {FaPortrait, FaHome, FaBell, FaCalendarAlt, FaCalendarDay} from 'react-icons/fa'
+import {FaPortrait, FaBell, FaCalendarAlt, FaCalendarDay} from 'react-icons/fa'
+import { primaryColor } from './helpers/themes';
+
+// todo: add a resources section to navigate users to beyondblue, headspace etc.
 
 // const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const tabOptions = {
-  tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-}
 export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator initialRouteName="Home"
       screenOptions={{
-        tabBarActiveTintColor: '#e91e63',
+        tabBarActiveTintColor: primaryColor,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerStyle: {
+        },
       }}>
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'BeeMindful', tabBarLabel: 'Today', tabBarIcon: () => (
-            <FaCalendarDay />
-          ), ...tabOptions}}
+          options={{title: 'BeeMindful', tabBarLabel: 'Today', tabBarIcon: ({color}) => (
+            <FaCalendarDay style={{color: color, fontSize: '24px'}}/>
+          )}}
           
         />
         <Tab.Screen name="Summary" component={SummaryScreen} options={{
-          tabBarIcon: () => (
-            <FaCalendarAlt />
-          ),
-          ...tabOptions
+          tabBarIcon: ({color}) => (
+            <FaCalendarAlt style={{color: color, fontSize: '24px'}}/>
+          )
         }}/>
                   <Tab.Screen name="Notifications" component={NotificationScreen} options={{
-            tabBarIcon: () => (
-              <FaBell />
+            tabBarIcon: ({color}) => (
+              <FaBell style={{color: color, fontSize: '24px'}}/>
             ),
-            tabBarBadge: 3,
-            ...tabOptions
+            tabBarBadge: 3
           }}/>
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
           // tabBarLabel: 'Profile',
-          tabBarIcon: () => (
-            <FaPortrait />
-          ),
-          ...tabOptions
+          tabBarIcon: ({color}) => {
+            return (
+            <FaPortrait style={{color: color, fontSize: '24px'}}/>
+          )}
         }}/>
       </Tab.Navigator>
     </NavigationContainer>
