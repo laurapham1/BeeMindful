@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Image } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 // import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -30,7 +29,7 @@ export default function App() {
         <Tab.Screen
           name="Home"
           component={HomeScreen}
-          options={{title: 'BeeMindful', tabBarLabel: 'Today', tabBarIcon: ({color}) => (
+          options={{title: <Image source={require('./assets/logo.png')} style={{width: 60, height: 60}}/>, tabBarLabel: 'Today', tabBarIcon: ({color}) => (
             <FaCalendarDay style={{color: color, fontSize: '24px'}}/>
           )}}
           
