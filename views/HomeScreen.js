@@ -1,15 +1,46 @@
 import { useState } from 'react';
 import { StyleSheet, Text, View, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
-import { primaryColor, secondaryColor } from '../helpers/themes';
+import { highlightColor, primaryColor, secondaryColor } from '../helpers/themes';
 
+const defaultEmotions = [
+  {
+    name: 'angry',
+    icon: '😡',
+    isSelected: true  
+  },
+  {
+    name: 'sad',
+    icon: '🙁',
+    isSelected: false  
+  },
+  {
+    name: 'neutral',
+    icon: '😐',
+    isSelected: false  
+  },
+  {
+    name: 'content',
+    icon: '😊',
+    isSelected: false  
+  },
+  {
+    name: 'joyous',
+    icon: '😄',
+    isSelected: false  
+  },
+]
 export default function HomeScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false)
-  const [selectedEmotions, setSelectedEmotions] = useState(false)
+  const [emotions, setEmotions] = useState(defaultEmotions)
   const [thoughts, setThoughts] = useState('')
   const [actions, setActions] = useState('')
   const [isSaved, setIsSaved] = useState(false)
 
-  const handlePressEmotion = () => {
+  const handlePressEmotion = (toggledEmotion) => {
+    const newEmotions = emotions.map((emotion) => {
+      return emotion.name === toggledEmotion.name ? {...emotion, isSelected: !emotion.isSelected} : emotion
+    })
+    setEmotions(newEmotions)
   }
 
   const handlePressSave = () => {
@@ -21,12 +52,11 @@ export default function HomeScreen({navigation}) {
       <Text style={{...styles.heading, fontWeight: '600', marginBottom: '36px'}}>How are you today?</Text>
       <Text style={{...styles.heading, fontSize: '20px'}}>My feelings</Text>
       <View collapsable="true" style={styles.emotionsContainer}>
-        {/* emotion buttons which shows an overlay on click */}
-          <TouchableOpacity onPress={() => handlePressEmotion()} accessibilityLabel='angry' color="white" ><Text style={styles.emotionContainer}>😡</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => handlePressEmotion()}  accessibilityLabel='sad' color="white" ><Text style={styles.emotionContainer}>🙁</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => handlePressEmotion()}  accessibilityLabel='neutral' color="white" ><Text style={styles.emotionContainer}>😐</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => handlePressEmotion()}  accessibilityLabel='content' color="white" ><Text style={styles.emotionContainer}>😊</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => handlePressEmotion()} accessibilityLabel='joyful' color="white" ><Text style={styles.emotionContainer}>😄</Text></TouchableOpacity>
+        {emotions.map((emotion) => {
+          return (
+            <TouchableOpacity onPress={() => handlePressEmotion(emotion)} accessibilityLabel={emotion.name} color="white"><Text style={{outline: emotion.isSelected ? `1px dashed ${highlightColor}` : '', ...styles.emotionContainer}}>{emotion.icon}</Text></TouchableOpacity>
+          )
+        })}
       </View>
       <Text style={{...styles.heading, fontSize: '20px'}}>My thoughts</Text>
       <TextInput editable multiline numberOfLines={6} onChangeText={text => setThoughts(text)} value={thoughts} style={styles.inputArea}/>
@@ -80,10 +110,12 @@ const styles = StyleSheet.create({
   },
   emotionsContainer: {
     flexDirection: 'row',
-    gap: '16px'
+    gap: '16px',
   },
   emotionContainer: {
     fontSize: '36px',
+    borderRadius: '4px',
+    padding: '4px',
   },
   centeredView: {
     flex: 1,
