@@ -1,15 +1,18 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, TextInput } from 'react-native';
-import { primaryColor } from '../helpers/themes';
+import { StyleSheet, Text, View, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
+import { primaryColor, secondaryColor } from '../helpers/themes';
 
 export default function HomeScreen({navigation}) {
   const [modalVisible, setModalVisible] = useState(false)
   const [selectedEmotions, setSelectedEmotions] = useState(false)
   const [thoughts, setThoughts] = useState('')
   const [actions, setActions] = useState('')
+  const [isSaved, setIsSaved] = useState(false)
 
   const handlePressEmotion = () => {
-    // add selected emotion to selected emotion array
+  }
+
+  const handlePressSave = () => {
     setModalVisible(!modalVisible)
   }
 
@@ -29,6 +32,14 @@ export default function HomeScreen({navigation}) {
       <TextInput editable multiline numberOfLines={6} onChangeText={text => setThoughts(text)} value={thoughts} style={styles.inputArea}/>
       <Text style={{...styles.heading, fontSize: '20px'}}>My actions</Text>
       <TextInput editable multiline numberOfLines={6} onChangeText={text => setActions(text)} value={actions} style={styles.inputArea}/>
+      <Button
+        onPress={handlePressSave}
+        title="Save"
+        color={secondaryColor}
+        accessibilityLabel="Save your daily entry"
+        disabled={isSaved}
+        style={{borderRadius: '16px'}}
+      />
       <Modal
         animationType="slide"
         transparent={true}
@@ -38,7 +49,7 @@ export default function HomeScreen({navigation}) {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={styles.modalText}>Emotion saved for today</Text>
+            <Text style={styles.modalText}>Daily update saved for 'date'</Text>
             <Text style={styles.modalText}>🤗</Text>
             <TouchableOpacity
               style={styles.button}
@@ -60,6 +71,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: '24px',
+    padding: '16px'
   },
   heading: {
     fontSize: '30px',
@@ -112,6 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: '8px',
     padding: '8px',
     fontSize: '16px',
-    width: '75vw'
+    width: '75vw',
+    maxWidth: '600px'
   }
 })
