@@ -7,7 +7,7 @@ import ProfileScreen from './views/ProfileScreen';
 import NotificationScreen from './views/NotificationScreen';
 import SummaryScreen from './views/SummaryScreen';
 import {FaPortrait, FaBell, FaCalendarAlt, FaCalendarDay} from 'react-icons/fa'
-import { primaryColor } from './helpers/themes';
+import { primaryColor, highlightColor } from './helpers/themes';
 
 // todo: add a resources section to navigate users to beyondblue, headspace etc.
 
@@ -24,6 +24,7 @@ export default function App() {
           fontWeight: 'bold',
         },
         headerStyle: {
+          backgroundColor: highlightColor
         },
       }}>
         <Tab.Screen
