@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { StyleSheet, Text, View, Modal, TouchableOpacity, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Modal, TouchableOpacity, TextInput } from 'react-native';
 import { highlightColor, primaryColor, secondaryColor } from '../helpers/themes';
 
 const defaultEmotions = [
@@ -49,8 +49,8 @@ export default function HomeScreen({navigation}) {
 
   return (
     <View style={styles.container}>
-      <Text style={{...styles.heading, fontWeight: '600', marginBottom: '36px'}}>How are you today?</Text>
-      <Text style={{...styles.heading, fontSize: '20px'}}>My feelings</Text>
+      <Text style={{...styles.text, fontWeight: '600', marginBottom: '36px'}}>How are you today?</Text>
+      <Text style={{...styles.text, fontSize: '20px'}}>My feelings</Text>
       <View collapsable="true" style={styles.emotionsContainer}>
         {emotions.map((emotion) => {
           return (
@@ -58,18 +58,16 @@ export default function HomeScreen({navigation}) {
           )
         })}
       </View>
-      <Text style={{...styles.heading, fontSize: '20px'}}>My thoughts</Text>
+      <Text style={{...styles.text, fontSize: '20px'}}>My thoughts</Text>
       <TextInput editable multiline numberOfLines={6} onChangeText={text => setThoughts(text)} value={thoughts} style={styles.inputArea}/>
-      <Text style={{...styles.heading, fontSize: '20px'}}>My actions</Text>
+      <Text style={{...styles.text, fontSize: '20px'}}>My actions</Text>
       <TextInput editable multiline numberOfLines={6} onChangeText={text => setActions(text)} value={actions} style={styles.inputArea}/>
-      <Button
+      <TouchableOpacity
         onPress={handlePressSave}
-        title="Save"
-        color={secondaryColor}
         accessibilityLabel="Save your daily entry"
         disabled={isSaved}
-        style={{borderRadius: '16px'}}
-      />
+        style={{borderRadius: '8px', border: '1px solid white', color: 'inherit', padding: '8px'}}
+      ><Text style={{...styles.text, fontSize: '16px'}}>Save</Text></TouchableOpacity>
       <Modal
         animationType="slide"
         transparent={true}
@@ -103,7 +101,7 @@ const styles = StyleSheet.create({
     gap: '24px',
     padding: '16px'
   },
-  heading: {
+  text: {
     fontSize: '30px',
     color: 'white',
     fontWeight: '350'
