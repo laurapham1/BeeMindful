@@ -1,4 +1,5 @@
 const primaryColor = '#FF616F'
-const secondaryColor = '#F7E5E9'
+const secondaryColor = '#4D4CAC'
+const highlightColor = '#F4F5FA'
 
-export {primaryColor, secondaryColor}
+export {primaryColor, secondaryColor,highlightColor}
