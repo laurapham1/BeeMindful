@@ -10,11 +10,27 @@ import { faker } from "@faker-js/faker";
 
 const getItem = (_data, index) => {
   const randomName = faker.person.fullName();
-  const message1 = <span> shared a <strong>daily update</strong></span>
-  const message2 = <span> like your <strong>daily update</strong></span>
-  const message3 = <span> commented on your <strong>daily update</strong></span>
-  const messageArray = [message1,message2, message3]
-  const randomMessage = messageArray[Math.floor(Math.random() * messageArray.length)]
+  const message1 = (
+    <span>
+      {" "}
+      shared a <strong>daily update</strong>
+    </span>
+  );
+  const message2 = (
+    <span>
+      {" "}
+      liked your <strong>daily update</strong>
+    </span>
+  );
+  const message3 = (
+    <span>
+      {" "}
+      commented on your <strong>daily update</strong>
+    </span>
+  );
+  const messageArray = [message1, message2, message3];
+  const randomMessage =
+    messageArray[Math.floor(Math.random() * messageArray.length)];
   return {
     id: Math.random().toString(12).substring(0),
     owner: randomName,
@@ -32,7 +48,10 @@ const getItem = (_data, index) => {
 const getItemCount = (_data) => 20;
 
 const Item = ({ owner, title, time, seen }) => (
-  <View style={{backgroundColor: seen ? '' : '#FAFBFF', ...styles.item}} onPress={() => handlePressNotification()}>
+  <View
+    style={{ backgroundColor: seen ? "" : "#FAFBFF", ...styles.item }}
+    onPress={() => handlePressNotification()}
+  >
     <Image
       // className="w-6 h-6 rounded-full"
       source={{
@@ -48,7 +67,7 @@ const Item = ({ owner, title, time, seen }) => (
     />
     <View style={styles.notificationText}>
       <Text style={styles.title}>{title}</Text>
-      <Text style={{color: '#737983', ...styles.title}}>{time}</Text>
+      <Text style={{ color: "#737983", ...styles.title }}>{time}</Text>
     </View>
   </View>
 );
@@ -59,7 +78,12 @@ export default function NotificationScreen({ navigation }) {
       <VirtualizedList
         initialNumToRender={10}
         renderItem={({ item }) => (
-          <Item title={item.title} owner={item.owner} time={item.time} seen={item.seen} />
+          <Item
+            title={item.title}
+            owner={item.owner}
+            time={item.time}
+            seen={item.seen}
+          />
         )}
         keyExtractor={(item) => item.id}
         getItemCount={getItemCount}
@@ -83,19 +107,19 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: "16px",
-    cursor: 'pointer',
-    borderBottomColor: '#EBECF0',
+    cursor: "pointer",
+    borderBottomColor: "#EBECF0",
     borderBottomWidth: 1,
   },
   notificationText: {
-    display: 'flex',
-    gap: '4px',
-    width: '100%'
+    display: "flex",
+    gap: "4px",
+    width: "100%",
   },
   title: {
     fontSize: 12,
-    // overflow: 'hidden', 
+    // overflow: 'hidden',
     // textOverflow: 'ellipsis',
-    width: '100%'
+    width: "100%",
   },
 });
