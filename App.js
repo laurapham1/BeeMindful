@@ -6,7 +6,7 @@ import HomeScreen from './views/HomeScreen';
 import ProfileScreen from './views/ProfileScreen';
 import NotificationScreen from './views/NotificationScreen';
 import SummaryScreen from './views/SummaryScreen';
-import {FaPortrait, FaBell, FaCalendarAlt, FaCalendarDay} from 'react-icons/fa'
+import {FaPortrait, FaBell, FaCalendarAlt, FaCalendarDay, FaBook} from 'react-icons/fa'
 import { primaryColor, highlightColor } from './helpers/themes';
 
 // todo: add a resources section to navigate users to beyondblue, headspace etc.
@@ -40,12 +40,17 @@ export default function App() {
             <FaCalendarAlt style={{color: color, fontSize: '24px'}}/>
           )
         }}/>
-                  <Tab.Screen name="Notifications" component={NotificationScreen} options={{
+        <Tab.Screen name="Resources" component={SummaryScreen} options={{
+          tabBarIcon: ({color}) => (
+            <FaBook style={{color: color, fontSize: '24px'}}/>
+          )
+        }}/>
+                  {/* <Tab.Screen name="Notifications" component={NotificationScreen} options={{
             tabBarIcon: ({color}) => (
               <FaBell style={{color: color, fontSize: '24px'}}/>
             ),
             tabBarBadge: 3
-          }}/>
+          }}/> */}
         <Tab.Screen name="Profile" component={ProfileScreen} options={{
           // tabBarLabel: 'Profile',
           tabBarIcon: ({color}) => {
