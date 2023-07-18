@@ -6,7 +6,7 @@ const defaultEmotions = [
   {
     name: 'angry',
     icon: '😡',
-    isSelected: true  
+    isSelected: false  
   },
   {
     name: 'sad',
@@ -34,7 +34,6 @@ export default function HomeScreen({navigation}) {
   const [emotions, setEmotions] = useState(defaultEmotions)
   const [thoughts, setThoughts] = useState('')
   const [actions, setActions] = useState('')
-  const [isSaved, setIsSaved] = useState(false)
 
   const handlePressEmotion = (toggledEmotion) => {
     const newEmotions = emotions.map((emotion) => {
@@ -65,7 +64,6 @@ export default function HomeScreen({navigation}) {
       <TouchableOpacity
         onPress={handlePressSave}
         accessibilityLabel="Save your daily entry"
-        disabled={isSaved}
         style={{borderRadius: '8px', border: '1px solid white', color: 'inherit', padding: '8px'}}
       ><Text style={{...styles.text, fontSize: '16px'}}>Save</Text></TouchableOpacity>
       <Modal
